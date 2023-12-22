@@ -1,8 +1,8 @@
-var stage = new createjs.Stage("myStage");
+let stage = new createjs.Stage("myStage");
 
 stage.enableDOMEvents(true);
-//var drawingCanvas = new createjs.Shape();
-var drawingCanvas = new createjs.Container();
+//let drawingCanvas = new createjs.Shape();
+let drawingCanvas = new createjs.Container();
 //stage.addChild(container);
 stage.addEventListener("stagemousedown", drawStart);
 stage.addEventListener("stagemouseup", drawEnd);
@@ -10,7 +10,7 @@ stage.addEventListener("stagemouseup", drawEnd);
 stage.addChild(drawingCanvas);
 //stage.update();
 createjs.Ticker.addEventListener("tick", tick);
-var color,
+let color,
   stroke,
   oldPt,
   oldMidPt,
@@ -32,8 +32,8 @@ function createPoint(x, y) {
   return new createjs.Point(x || stage.mouseX, y || stage.mouseY);
 }
 function drawMovement() {
-  var pt = createPoint();
-  var radius = Math.sqrt(
+  let pt = createPoint();
+  let radius = Math.sqrt(
     Math.pow(oldMidPt.x - pt.x, 2) + Math.pow(oldMidPt.y - pt.y, 2)
   );
   if (!newCircle) {
@@ -71,11 +71,11 @@ function modifyCircleStart(ll) {
     oldMidPt = this.oldMidPt;
   });
   ll.circle.on("pressmove", function circleMovement(e) {
-    var pt = createPoint(e.stageX, e.stageY);
-    var radius = Math.sqrt(
+    let pt = createPoint(e.stageX, e.stageY);
+    let radius = Math.sqrt(
       Math.pow(oldMidPt.x - pt.x, 2) + Math.pow(oldMidPt.y - pt.y, 2)
     );
-    //var parent = this.parent;
+    //let parent = this.parent;
     if (!ll.circle.newCircle) {
       this.off("pressmove", circleMovement);
       drawingCanvas.removeChild(this);
@@ -114,11 +114,11 @@ function modifyCircleStart(ll) {
     oldMidPt = this.oldMidPt;
   });
   ll.circle.on("pressmove", function circleMovement(e) {
-    var pt = createPoint(e.stageX, e.stageY);
-    var radius = Math.sqrt(
+    let pt = createPoint(e.stageX, e.stageY);
+    let radius = Math.sqrt(
       Math.pow(oldMidPt.x - pt.x, 2) + Math.pow(oldMidPt.y - pt.y, 2)
     );
-    //var parent = this.parent;
+    //let parent = this.parent;
     if (!ll.circle.newCircle) {
       this.off("pressmove", circleMovement);
       drawingCanvas.removeChild(this);
@@ -150,7 +150,7 @@ function modifyCircleStart(ll) {
 }
 function drawEnd() {
   stage.removeEventListener("stagemousemove", drawMovement);
-  var ll = { circle: null, text: null };
+  let ll = { circle: null, text: null };
   ll.circle = circle;
   ll.circle.oldPt = oldPt;
   ll.circle.oldMidPt = oldMidPt;
