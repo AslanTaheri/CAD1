@@ -28,3 +28,6 @@ function drawStart() {
   stage.addEventListener("stagemousemove", drawMovement);
   toUpdate = true;
 }
+function createPoint(x, y) {
+  return new createjs.Point(x || stage.mouseX, y || stage.mouseY);
+}
