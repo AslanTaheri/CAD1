@@ -148,3 +148,21 @@ function modifyCircleStart(ll) {
     ll.circle.newCirle = true;
   });
 }
+function drawEnd() {
+  stage.removeEventListener("stagemousemove", drawMovement);
+  var ll = { circle: null, text: null };
+  ll.circle = circle;
+  ll.circle.oldPt = oldPt;
+  ll.circle.oldMidPt = oldMidPt;
+  ll.text = txt;
+  ll.circle.newCircle = true;
+  modifyCircleStart(ll);
+  newCircle = true;
+}
+function tick(event) {
+  // this set makes it so the stage only re-renders when an event handler indicates a change has happened.
+  if (toUpdate) {
+    toUpdate = false; // only update once
+    stage.update(event);
+  }
+}
