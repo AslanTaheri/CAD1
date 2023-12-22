@@ -62,3 +62,89 @@ function drawMovement() {
   toUpdate = true;
   newCircle = false;
 }
+function modifyCircleStart(ll) {
+  ll.circle.on("mousedown", function () {
+    this.parent.addChild(this);
+    //color = "#FEDCBA";
+    //stroke = 1;
+    oldPt = this.oldPt;
+    oldMidPt = this.oldMidPt;
+  });
+  ll.circle.on("pressmove", function circleMovement(e) {
+    var pt = createPoint(e.stageX, e.stageY);
+    var radius = Math.sqrt(
+      Math.pow(oldMidPt.x - pt.x, 2) + Math.pow(oldMidPt.y - pt.y, 2)
+    );
+    //var parent = this.parent;
+    if (!ll.circle.newCircle) {
+      this.off("pressmove", circleMovement);
+      drawingCanvas.removeChild(this);
+      ll.circle = new createjs.Shape();
+      drawingCanvas.addChild(ll.circle);
+
+      //ll.circle.on('pressmove',circleMovement);
+    }
+    this.graphics
+      .setStrokeStyle(stroke, "round", "round")
+      .beginStroke(color)
+      .moveTo(oldMidPt.x, oldMidPt.y)
+      .lineTo(pt.x, pt.y)
+      .moveTo(oldMidPt.x, oldMidPt.y)
+      .beginFill("rgba(255,255,255,0.6)")
+      .drawCircle(oldMidPt.x, oldMidPt.y, radius);
+    drawingCanvas.removeChild(ll.text);
+    ll.text = new createjs.Text((radius | 0) + "", "10px Arial", "#FFF");
+    ll.text.x = (pt.x + oldMidPt.x) >> 1;
+    ll.text.y = (pt.y + oldMidPt.y) >> 1;
+    //  console.log(txt);
+    // stage.update();
+    toUpdate = true;
+    ll.circle.newCircle = false;
+  });
+  ll.circle.on("pressup", function circleEnd(e) {
+    ll.circle.newCirle = true;
+  });
+}
+function modifyCircleStart(ll) {
+  ll.circle.on("mousedown", function () {
+    this.parent.addChild(this);
+    //color = "#FEDCBA";
+    //stroke = 1;
+    oldPt = this.oldPt;
+    oldMidPt = this.oldMidPt;
+  });
+  ll.circle.on("pressmove", function circleMovement(e) {
+    var pt = createPoint(e.stageX, e.stageY);
+    var radius = Math.sqrt(
+      Math.pow(oldMidPt.x - pt.x, 2) + Math.pow(oldMidPt.y - pt.y, 2)
+    );
+    //var parent = this.parent;
+    if (!ll.circle.newCircle) {
+      this.off("pressmove", circleMovement);
+      drawingCanvas.removeChild(this);
+      ll.circle = new createjs.Shape();
+      drawingCanvas.addChild(ll.circle);
+
+      //ll.circle.on('pressmove',circleMovement);
+    }
+    this.graphics
+      .setStrokeStyle(stroke, "round", "round")
+      .beginStroke(color)
+      .moveTo(oldMidPt.x, oldMidPt.y)
+      .lineTo(pt.x, pt.y)
+      .moveTo(oldMidPt.x, oldMidPt.y)
+      .beginFill("rgba(255,255,255,0.6)")
+      .drawCircle(oldMidPt.x, oldMidPt.y, radius);
+    drawingCanvas.removeChild(ll.text);
+    ll.text = new createjs.Text((radius | 0) + "", "10px Arial", "#FFF");
+    ll.text.x = (pt.x + oldMidPt.x) >> 1;
+    ll.text.y = (pt.y + oldMidPt.y) >> 1;
+    //  console.log(txt);
+    // stage.update();
+    toUpdate = true;
+    ll.circle.newCircle = false;
+  });
+  ll.circle.on("pressup", function circleEnd(e) {
+    ll.circle.newCirle = true;
+  });
+}
